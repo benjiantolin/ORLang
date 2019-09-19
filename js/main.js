@@ -153,6 +153,4 @@ legend.onAdd = function () {
 // 11. Add a legend to map
 legend.addTo(mymap);
 // 12. Add a scale bar to map
-L.control.scale({position: 'bottomleft'}).addTo(mymap);
-//Add mouse position to map
-L.control.mousePosition().addTo(mymap);
+// L.control.scale({position: 'bottomleft'}).addTo(mymap);
