@@ -48,12 +48,12 @@ colors = chroma.scale('YlOrRd').colors(7); //colors = chroma.scale('OrRd').color
 
 function setColor(density) {
     var id = 0;
-    if (density > 58) { id = 6; }
-    else if (density > 25 && density <= 58) { id = 5; }
-    else if (density > 19 &&  density <= 25) { id = 4; }
-    else if (density > 14 && density <= 19) { id = 3; }
-    else if (density > 9 && density <= 14) { id = 2; }
-    else if (density > 4 &&  density <= 9) { id = 1; }
+    if (density > .94) { id = 6; }
+    else if (density > .92 && density <= .94) { id = 5; }
+    else if (density > .88 &&  density <= .92) { id = 4; }
+    else if (density > .83 && density <= .88) { id = 3; }
+    else if (density > .77 && density <= .83) { id = 2; }
+    else if (density > .72 &&  density <= .77) { id = 1; }
     else  { id = 0; }
     return colors[id];
 }
@@ -61,7 +61,7 @@ function setColor(density) {
 // 7. Set style function that sets fill color.md property equal to cell tower density
 function style(feature) {
     return {
-        fillColor: setColor(feature.properties.count),
+        fillColor: setColor(feature.properties.id1),
         fillOpacity: 0.4,
         weight: 2,
         opacity: 1,
@@ -73,7 +73,7 @@ function style(feature) {
 // 3. add the state layer to the map. Also, this layer has some interactive features.
 
 // 3.1 declare an empty/null geojson object
-var states = null;
+var county = null;
 
 // 3.2 interactive features.
 // 3.2.1 highlight a feature when the mouse hovers on it.
@@ -93,7 +93,7 @@ function highlightFeature(e) {
     // select the update class, and update the contet with the input value.
     $(".update").html(
       '<b>' + layer.feature.properties.county + ' County'+'</b><br>'
-            + layer.feature.properties.count + ' Airports<br>');
+            + layer.feature.properties.id1 *100 + '% Speaks only English<br>');
 }
 
 // 3.2.2 zoom to the highlighted feature when the mouse is clicking onto it.
@@ -104,7 +104,7 @@ function zoomToFeature(e) {
 // 3.2.3 reset the hightlighted feature when the mouse is out of its region.
 function resetHighlight(e) {
     county.resetStyle(e.target);
-    $(".update").html("Hover over a state");
+    $(".update").html("Hover over a county");
 }
 
 // 3.3 add these event the layer obejct.
@@ -131,17 +131,14 @@ legend.onAdd = function () {
 
     // Create Div Element and Populate it with HTML
     var div = L.DomUtil.create('div', 'legend');
-    div.innerHTML += '<b># of Airports</b><br />';
-    div.innerHTML += '<i style="background: ' + colors[6] + '; opacity: 0.5"></i><p>59+</p>';
-    div.innerHTML += '<i style="background: ' + colors[5] + '; opacity: 0.5"></i><p>26-58</p>';
-    div.innerHTML += '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p>20-25</p>';
-    div.innerHTML += '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p>15-19</p>';
-    div.innerHTML += '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p>10-14</p>';
-    div.innerHTML += '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p> 5-9</p>';
-    div.innerHTML += '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p> 0- 4</p>';
-    div.innerHTML += '<hr><b>Control Tower Status<b><br />';
-    div.innerHTML += '<i class="fa fa-plane marker-color-1"></i><p> No control tower</p>';
-    div.innerHTML += '<i class="fa fa-plane marker-color-2"></i><p> Has control tower</p>';
+    div.innerHTML += '<b>% Speaks only English</b><br />';
+    div.innerHTML += '<i style="background: ' + colors[6] + '; opacity: 0.5"></i><p>>94%</p>';
+    div.innerHTML += '<i style="background: ' + colors[5] + '; opacity: 0.5"></i><p>93%-94%</p>';
+    div.innerHTML += '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p>89%-92%</p>';
+    div.innerHTML += '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p>83%-88%</p>';
+    div.innerHTML += '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p>77%-83%</p>';
+    div.innerHTML += '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p>72%-77%</p>';
+    div.innerHTML += '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><72%</p>';
     // Return the Legend div containing the HTML content
     return div;
 };
