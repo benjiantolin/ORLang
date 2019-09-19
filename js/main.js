@@ -10,6 +10,13 @@ var mymap = L.map('map', {
     zoomcontrol: false,
     detectRetina: true });
 
+$(".leaflet-control-zoom").hide();
+
+L.control.scale({
+  // bottom: 50  ;
+  position: 'topright'
+}).addTo(mymap);
+
 // 2. Add a base map.
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap);
 
