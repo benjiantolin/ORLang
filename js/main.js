@@ -98,7 +98,7 @@ var chart = c3.generate({
 });
 
 // 6. Set function for color ramp
-colors = chroma.scale('Oranges').colors(7); //colors = chroma.scale('OrRd').colors(5);
+colors = chroma.scale('YlOrRd').colors(7); //colors = chroma.scale('OrRd').colors(5);
 
 function setColor(density) {
   var id = 0;
@@ -205,4 +205,4 @@ legend.addTo(mymap);
 //attribution
 $(".leaflet-control-attribution")
   .css("background-color", "transparent")
-  .html("Supported by <a href='https://oregonexplorer.info/topics/rural-communities?ptopic=140' target='_blank'>The RCE @ Oregon State University </a> Created by: <a href='#' target='_blank'>Benji Antolin");
+  .html("Supported by <a href='https://oregonexplorer.info/topics/rural-communities?ptopic=140' target='_blank'>The RCE @ Oregon State University </a> | Web Map by: <a href='#' target='_blank'>Benji Antolin");
