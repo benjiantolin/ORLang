@@ -3,6 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Benji Antolin">
   <title>DEI Language Tool</title>
   <!-- css stylesheets -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -10,9 +12,12 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css" />
 
   <!-- javascript libraries -->
+  <script src="https://unpkg.com/d3@5/dist/d3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
@@ -25,27 +30,46 @@
 <body>
   <div id="map"></div>
   <div id='sidebar'>
-    <div id="title"><i class="fas fa-globe"></i> LANGUAGE SPOKEN AT HOME FOR THE POPULATION 5 YEARS AND OVER</div>
-    <div class='update'>Hover over a county</div>
-
-  </div>
-  <!-- <div id="sidebar" data-simplebar data-simplebar-auto-hide="false">
-    <div id="title"><i class="fas fa-tachometer-alt"></i> Irrigation Calculator
+    <div id="title"><i class="fas fa-globe"></i> DEI Language Tool
+      <span><a data-toggle="modal" data-target="#disclaimer"><i class="nav fas fa-question-circle"></i></a></span>
       <span><a href="#"><i class="fab fa-facebook"></i></a></span>
       <span><a href="#"><i class="fab fa-instagram"></i></a></span>
       <span><a href="#"><i class="fab fa-twitter-square"></i></a></span>
-      <span><a data-toggle="modal" data-target="#disclaimer"><i class="nav fas fa-question-circle"></i></a></span>
     </div>
-    <p style="font-size:small; font-style:italic"> Please work through the order of the following steps to calculate the water for irrigation.</p>
-    <div class="step">
-      <span><img src="img\logoonwhite.png" id="twcaLogo" class="logo-thumbnail" alt="twcaLogo"></span>
-      <span><img src="img\pennington-logo-(minus-glow).jpg" id="penningtonLogo" class="logo-thumbnail" alt="penningtonLogo"></span>
-      <span><img src="img\proseeds_final.jpg" id="proseedsLogo" class="logo-thumbnail" alt="proseedsLogo"></span>
-      <span><img src="img\Pure seed.jpg" id="pureseedLogo" class="logo-thumbnail" alt="pureseedLogo"></span>
+    <div id="subTitle">Language Spoken at Home for the Population 5 Years and Over</div>
+    <div class='update'>Hover over a county</div>
+    <div class="result">
+      <p class="d-flex justify-content-center">Share of Language Spoken at Home</p>
+    <div id="chart" style="min-height: 250px"></div>
     </div>
-
-  </div> -->
-
+  </div>
+  <div id="disclaimer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="width:1250px!important">
+      <div class="modal-content">
+        <div class="modal-header">
+          <strong class="modal-title" id="exampleModalLongTitle">Disclaimer</strong>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="demo" class="carousel slide" data-ride="carousel">
+            <p>This calculator is intended only as a watering guide and is based on historical data. For greater accuracy we recommend consulting with your local extension agency. Please make sure your watering practice complies with state and local
+              ordinances. For more information about this calculator contact us at <a href="mailto://info@tgwca.org">info@tgwca.org</a>.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="col-md-10">
+            <span id="mapType">Don't show this info again.</span>
+            <label id="nextTimeSwitcher" class="switch">
+              <input type="checkbox">
+            </label>
+          </div>
+          <button id="disclaimer-close" type="button" class="btn btn-primary col-md-2">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="js/main.js"></script>
 </body>
 

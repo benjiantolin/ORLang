@@ -34,15 +34,27 @@ border-radius: 5px;
   padding: 40px 15px 20px 15px;
 }
 
+#sidebar .result p {
+  font-size: 20px;
+  line-height: 30px;
+  font-family: 'Oswald', sans-serif;
+}
+
 #title {
-  margin-bottom: 30px;
-  font-size: 16px;
+  margin-bottom: 20px;
+  font-size: 26px;
    font-family: 'Oswald', sans-serif;
 }
 
 #title span {
   font-size: 14px;
   float: right;
+}
+
+#subTitle {
+  margin-bottom: 30px;
+  font-size: 16px;
+   font-family: 'Oswald', sans-serif;
 }
 
 #sidebar a {
