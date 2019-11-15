@@ -49,70 +49,18 @@ L.control.scale({
 // 2. Add a base map.
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap);
 
-Promise.all([
-      d3.csv('assets/shareLang.csv'),
-      // d3.json('assets/districts.geojson'),
-    ]).then(function(datasets) {
-      var total = ["Total Population"];
-      var engl = ["English Only"];
-      var span = ["Spanish"];
-      var fren = ["French, Haitian, or Cajun"];
-      var germ = ["German or other West Germanic"];
-      var russ = ["Russian, Polish, or other Slavic"];
-      var indo = ["Other Indo-European"];
-      var kore = ["Korean"];
-      var chin = ["Chinese (incl. Mandarin, Cantonese)"];
-      var viet = ["Vietnamese"];
-      var tago = ["Tagolag (incl. Filipino)"];
-      var otherAz = ["Other Asian and Pacific Island"];
-      var arab = ["Arabic"];
-      var other = ["Other and unspecified"];
-      datasets[0].forEach(function(d) {
-        total.push((d["total"]))
-        engl.push(+d["shareEngl"])
-        span.push(+d["shareSpan"])
-        fren.push(+d["shareFren"])
-        germ.push(+d["shareGerm"])
-        russ.push(+d["shareRuss"])
-        indo.push(+d["shareIndo"])
-        kore.push(+d["shareKore"])
-        chin.push(+d["shareChin"])
-        viet.push(+d["shareViet"])
-        tago.push(+d["shareTago"])
-        otherAz.push(+d["shareOtherAz"])
-        arab.push(+d["shareArab"])
-        other.push(+d["shareOther"])
-      });
-var chart = c3.generate({
-    data: {
-        columns: [
-            [engl, span, fren, germ, russ, indo, kore, chin, viet, tago, otherAz, arab, other],
-        ],
-        type : 'donut',
-    },
-    donut: {
-        title: "Share"
-    },
-    bindto: "#chart"
-});
-});
-
 // 6. Set function for color ramp
-colors = chroma.scale('YlOrRd').colors(7); //colors = chroma.scale('OrRd').colors(5);
+colors = chroma.scale('PuBuGn').colors(5);
 
-function setColor(density) {
+function setColor(lepHH) {
   var id = 0;
-  if (density > .94) {
-    id = 6;
-  } else if (density > .92 && density <= .94) {
-    id = 5;
-  } else if (density > .88 && density <= .92) {
+  if (lepHH > .25) {
     id = 4;
-  } else if (density > .83 && density <= .88) {
+  } else if (lepHH > .17 && lepHH <= .25) {
     id = 3;
-  } else if (density > .77 && density <= .83) {
+  } else if (lepHH > .1 && lepHH <= .17) {
     id = 2;
-  } else if (density > .72 && density <= .77) {
+  } else if (lepHH > .06 && lepHH <= .1) {
     id = 1;
   } else {
     id = 0;
@@ -120,10 +68,10 @@ function setColor(density) {
   return colors[id];
 }
 
-// 7. Set style function that sets fill color.md property equal to cell tower density
+// 7. Set style function that sets fill color.md
 function style(feature) {
   return {
-    fillColor: setColor(feature.properties.id1),
+    fillColor: setColor(feature.properties.id78),
     fillOpacity: 0.4,
     weight: 2,
     opacity: 1,
@@ -132,7 +80,7 @@ function style(feature) {
   };
 }
 
-// 3. add the state layer to the map. Also, this layer has some interactive features.
+// 3. add the county layer to the map. Also, this layer has some interactive features.
 
 // 3.1 declare an empty/null geojson object
 var county = null;
@@ -155,7 +103,8 @@ function highlightFeature(e) {
   // select the update class, and update the contet with the input value.
   $(".update").html(
     '<b>' + layer.feature.properties.county + ' County' + '</b><br>' +
-    layer.feature.properties.id1 * 100 + '% Speaks only English<br>');
+    (layer.feature.properties.id78 * 100).toFixed(0) + '% in LEP Household<br>');
+
 }
 // 3.2.3 reset the hightlighted feature when the mouse is out of its region.
 function resetHighlight(e) {
@@ -172,12 +121,71 @@ function onEachFeature(feature, layer) {
 }
 
 // 3.4 assign the geojson data path, style option and onEachFeature option. And then Add the geojson layer to the map.
-county = L.geoJson.ajax("assets/ORLang.geojson", {
+county = L.geoJson.ajax("assets/deiLang.geojson", {
   style: style,
   onEachFeature: onEachFeature
 }).addTo(mymap);
 
 
+Promise.all([
+  d3.csv('assets/shareLang.csv'),
+]).then(function(datasets) {
+
+  var geo = ["County"]
+  var tot = ["Total"];
+  var eng = ["English"];
+  var spa = ["Spanish"];
+  var fre = ["French"];
+  var ger = ["German"];
+  var rus = ["Russian"];
+  var oie = ["Other Indo-Euro"];
+  var kor = ["Korean"];
+  var chi = ["Chinese"];
+  var vet = ["Vietnamese"];
+  var tag = ["Tagolog"];
+  var oap = ["Other Asian and PI"];
+  var arb = ["Arabic"];
+  var oth = ["Other"];
+
+  datasets[0].forEach(function(d) {
+    geo.push(d["Geography"])
+    tot.push(+d["total"])
+    eng.push(+d["shareEng"])
+    spa.push(+d["shareSpan"])
+    fre.push(+d["shareFren"])
+    ger.push(+d["shareGerm"])
+    rus.push(+d["shareRuss"])
+    oie.push(+d["shareIndo"])
+    kor.push(+d["shareKore"])
+    chi.push(+d["shareChin"])
+    vet.push(+d["shareViet"])
+    tag.push(+d["shareTago"])
+    oap.push(+d["shareOtherAz"])
+    arb.push(+d["shareArab"])
+    oth.push(+d["shareOther"])
+  });
+
+  var chart = c3.generate({
+    title: {
+      text: 'Language Spoken at Home for the Population 5 Years and Over'
+    },
+    data: {
+      x: 'County',
+      columns: [geo, spa, fre, ger, rus, oie, kor, chi, vet, tag, oap, arb, oth],
+      groups: [
+        ["Spanish", "French", "German", "Russian", "Other Indo-Euro", "Korean", "Chinese", "Vietnamese", "Tagolog", "Other Asian and PI", "Arabic", "Other"]
+      ],
+      type: 'bar'
+    },
+    axis: {
+      rotated: true,
+      x: {
+        type: 'category'
+      }
+    },
+    bindto: "#chart"
+  });
+});
 // 9. Create Leaflet Control Object for Legend
 var legend = L.control({
   position: 'bottomright'
@@ -188,14 +196,12 @@ legend.onAdd = function() {
 
   // Create Div Element and Populate it with HTML
   var div = L.DomUtil.create('div', 'legend');
-  div.innerHTML += '<b>% Speaks only English</b><br />';
-  div.innerHTML += '<i style="background: ' + colors[6] + '; opacity: 0.5"></i><p>>94%</p>';
-  div.innerHTML += '<i style="background: ' + colors[5] + '; opacity: 0.5"></i><p>93%-94%</p>';
-  div.innerHTML += '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p>89%-92%</p>';
-  div.innerHTML += '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p>83%-88%</p>';
-  div.innerHTML += '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p>77%-83%</p>';
-  div.innerHTML += '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p>72%-77%</p>';
-  div.innerHTML += '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><72%</p>';
+  div.innerHTML += '<b>% in LEP Households</b><br />';
+  div.innerHTML += '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p>25%-31%</p>';
+  div.innerHTML += '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p>17%-24%</p>';
+  div.innerHTML += '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p>10%-16%</p>';
+  div.innerHTML += '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p>6%-9%</p>';
+  div.innerHTML += '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><6%</p>';
   // Return the Legend div containing the HTML content
   return div;
 };
