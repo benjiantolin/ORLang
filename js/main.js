@@ -183,9 +183,141 @@ Promise.all([
         type: 'category'
       }
     },
+        zoom: {
+          enabled: true
+        },
     bindto: "#chart"
   });
 });
+// Promise.all([
+//   d3.csv('assets/or.csv'),
+// ]).then(function(datasets) {
+//
+//   var geo = ["County"]
+//   var lang = ["Language"]
+//   var tot = ["Total"];
+//   var eng = ["English"];
+//   var spa = ["Spanish"];
+//   var spaWell = ["SpanishWell"]
+//   var spaLess = ["SpanishLess"]
+//   var fre = ["French"];
+//   var freWell = ["FrenchWell"]
+//   var freLess = ["FrenchLess"]
+//   var ger = ["German"];
+//   var gerWell = ["GermanWell"]
+//   var gerLess = ["GermanLess"]
+//   var rus = ["Russian"];
+//   var rusWell = ["RussianWell"]
+//   var rusLess = ["RussianLess"]
+//   var oie = ["Other Indo-Euro"];
+//   var oieWell = ["Other Indo-EuropeanWell"]
+//   var oieLess = ["Other Indo-EuropeanLess"]
+//   var kor = ["Korean"];
+//   var korWell = ["KoreanWell"]
+//   var korLess = ["KoreanLess"]
+//   var chi = ["Chinese"];
+//   var chiWell = ["ChineseWell"]
+//   var chiLess = ["ChineseLess"]
+//   var vie = ["Vietnamese"];
+//   var vieWell = ["VietnameseWell"]
+//   var vieLess = ["VietnameseLess"]
+//   var tag = ["Tagolog"];
+//   var tagWell = ["TagologWell"]
+//   var tagLess = ["TagologLess"]
+//   var oap = ["Other Asian and PI"];
+//   var oapWell = ["Other Asian and PIWell"]
+//   var oapLess = ["Other Asian and PILess"]
+//   var arb = ["Arabic"];
+//   var arbWell = ["ArabicWell"]
+//   var arbLess = ["ArabicLess"]
+//   var oth = ["Other"];
+//   var othWell = ["OtherWell"]
+//   var othLess = ["OtherLess"]
+//
+//   datasets[0].forEach(function(d) {
+//     geo.push(d["Geography"])
+//     lang.push(d["Language"])
+//     tot.push(+d["total"])
+//     eng.push(+d["shareEng"])
+//     spa.push(+d["spanish"])
+//     fre.push(+d["french"])
+//     ger.push(+d["german"])
+//     rus.push(+d["russian"])
+//     oie.push(+d["indoEuro"])
+//     kor.push(+d["korean"])
+//     chi.push(+d["chinese"])
+//     vie.push(+d["vietnamese"])
+//     tag.push(+d["tagolog"])
+//     oap.push(+d["otherAsian"])
+//     arb.push(+d["arabic"])
+//     oth.push(+d["other"])
+//     spaWell.push(+d["spanWell"])
+//     freWell.push(+d["frenWell"])
+//     gerWell.push(+d["germWell"])
+//     rusWell.push(+d["russWell"])
+//     oieWell.push(+d["indoWell"])
+//     korWell.push(+d["koreWell"])
+//     chiWell.push(+d["chinWell"])
+//     vieWell.push(+d["vietWell"])
+//     tagWell.push(+d["tagoWell"])
+//     oapWell.push(+d["otherAzWell"])
+//     arbWell.push(+d["arabWell"])
+//     othWell.push(+d["otherWell"])
+//     spaLess.push(+d["spanLess"])
+//     freLess.push(+d["frenLess"])
+//     gerLess.push(+d["germLess"])
+//     rusLess.push(+d["russLess"])
+//     oieLess.push(+d["indoLess"])
+//     korLess.push(+d["koreLess"])
+//     chiLess.push(+d["chinLess"])
+//     vieLess.push(+d["vietLess"])
+//     tagLess.push(+d["tagoLess"])
+//     oapLess.push(+d["otherAzLess"])
+//     arbLess.push(+d["arabLess"])
+//     othLess.push(+d["otherLess"])
+//   });
+//
+//   var chart = c3.generate({
+//     title: {
+//       text: 'Language Spoken at Home for the Population 5 Years and Over'
+//     },
+//     data: {
+//       x: 'County',
+//       columns: [geo, spaWell, spaLess, freWell, freLess, gerWell, gerLess, rusWell, rusLess, oieWell, oieLess, korWell, korLess, chiWell, chiLess, vieWell, vieLess, tagWell, tagLess, oapWell, oapLess, arbWell, arbLess, othWell, othLess,],
+//       groups: [
+//         ["SpanishWell", "SpanishLess"],
+//         ["FrenchWell", "FrenchLess"],
+//         ["GermanWell", "GermanLess"],
+//         ["RussianWell", "RussianLess"],
+//         ["Other Indo-EuropeanWell", "Other Indo-EuropeanLess"],
+//         ["KoreanWell", "KoreanLess"],
+//         ["ChineseWell", "ChineseLess"],
+//         ["VietnameseWell", "VietnameseLess"],
+//         ["TagologWell", "TagologLess"],
+//         ["Other Asian and PIWell", "Other Asian and PILess"],
+//         ["ArabicWell", "ArabicLess"],
+//         ["OtherWell", "OtherLess"],
+//       ],
+//       type: 'bar'
+//     },
+//     axis: {
+//       // rotated: true,
+//       x: {
+//         type: 'category'
+//       }
+//     },
+//     legend: {
+//   show: false
+// },
+// tooltip: {
+//   show: false
+// },
+//     zoom: {
+//       enabled: true
+//     },
+//     bindto: "#chart"
+//   });
+// });
 // 9. Create Leaflet Control Object for Legend
 var legend = L.control({
   position: 'bottomright'

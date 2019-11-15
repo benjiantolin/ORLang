@@ -7,18 +7,16 @@ html, body, #map {
 }
 
 /*info panel*/
-.info {
-z-index: 1000;
-position: absolute;
-right: 5px;
-top: 20px;
-padding: 6px 8px;
-font: 14px Arial, Helvetica, sans-serif;
-text-align: right;
-background: white;
-background: rgba(255, 255, 255, 0.8);
-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-border-radius: 5px;
+#info {
+  position: absolute;
+  z-index: 1000;
+  bottom: 20px;
+  width: 45%;
+  color: #333333;
+  padding: 6px 8px;
+  background: rgba(225, 225, 225, 0.5);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
 #sidebar {
