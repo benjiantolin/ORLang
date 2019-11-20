@@ -14,44 +14,9 @@
   <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css" />
-  <style>
-  path:hover {  opacity:0.9; }
-  rect:hover {  fill:blue; }
-  .axis {  font: 10px sans-serif; }
-  .legend tr{    border-bottom:1px solid grey; }
-  .legend tr:first-child{    border-top:1px solid grey; }
 
-  .axis path,
-
-  .axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-  }
-
-  .x.axis path {  display: none; }
-  /* .legend{
-      margin-bottom:76px;
-      display:inline-block;
-      border-collapse: collapse;
-      border-spacing: 0px;
-  } */
-  .legend td{
-      padding:4px 5px;
-      vertical-align:bottom;
-  }
-  .legendFreq, .legendPerc{
-      align:right;
-      width:50px;
-  }
-#projName {
-  text-align: center;
-}
-
-  </style>
   <!-- javascript libraries -->
   <script src="https://unpkg.com/d3@5/dist/d3.js"></script>
-  <script src="https://d3js.org/d3.v3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
@@ -79,7 +44,6 @@
     </div> -->
   </div>
   <div id="info">
-    <h3 id="projName">Oregon</h3>
   <div id="chart" style="min-height: 450px"></div>
 </div>
   <div id="disclaimer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -108,7 +72,7 @@
       </div>
     </div>
   </div>
-  <script src="js/main0.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

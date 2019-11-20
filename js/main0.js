@@ -1,46 +1,134 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-body{
-    width:1060px;
-    margin:50px auto;
-}
-path {  stroke: #fff; }
-path:hover {  opacity:0.9; }
-rect:hover {  fill:blue; }
-.axis {  font: 10px sans-serif; }
-.legend tr{    border-bottom:1px solid grey; }
-.legend tr:first-child{    border-top:1px solid grey; }
+$(window).ready(function() {
+  $('.loader').fadeOut("slow");
 
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+  $("#nextTimeSwitcher input").on("click", function() {
+    if ($("#nextTimeSwitcher input:checked").val() === "on") {
+      localStorage.setItem('popState', 'shown');
+    } else {
+
+      localStorage.setItem('popState', 'notShown');
+    }
+  })
+
+  if (localStorage.getItem('popState') != 'shown') {
+    console.log("show disclaimer");
+    $('#disclaimer').modal('show');
+
+  } else {
+    console.log("hide disclaimer");
+    $('#disclaimer').modal('hide');
+  }
+  $('#disclaimer-close').click(function(e) // You are clicking the close button
+    {
+      $('#disclaimer').fadeOut(); // Now the pop up is hiden.
+      $('#disclaimer').modal('hide');
+    });
+});
+
+$(".showFrontPage").on("click", function() {
+  $('#disclaimer').modal('show');
+  localStorage.setItem('popState', 'notShown');
+})
+// 1. Create a map object.
+var mymap = L.map('map', {
+  center: [44, -125.5],
+  zoom: 7,
+  maxZoom: 10,
+  minZoom: 3,
+  zoomcontrol: false,
+  detectRetina: true
+});
+
+$(".leaflet-control-zoom").hide();
+
+L.control.scale({
+  // bottom: 50  ;
+  position: 'topright'
+}).addTo(mymap);
+
+// 2. Add a base map.
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap);
+
+// 6. Set function for color ramp
+colors = chroma.scale('PuBuGn').colors(5);
+
+function setColor(lepHH) {
+  var id = 0;
+  if (lepHH > .25) {
+    id = 4;
+  } else if (lepHH > .17 && lepHH <= .25) {
+    id = 3;
+  } else if (lepHH > .1 && lepHH <= .17) {
+    id = 2;
+  } else if (lepHH > .06 && lepHH <= .1) {
+    id = 1;
+  } else {
+    id = 0;
+  }
+  return colors[id];
 }
 
-.x.axis path {  display: none; }
-.legend{
-    margin-bottom:76px;
-    display:inline-block;
-    border-collapse: collapse;
-    border-spacing: 0px;
-}
-.legend td{
-    padding:4px 5px;
-    vertical-align:bottom;
-}
-.legendFreq, .legendPerc{
-    align:right;
-    width:50px;
+// 7. Set style function that sets fill color.md
+function style(feature) {
+  return {
+    fillColor: setColor(feature.properties.id78),
+    fillOpacity: 0.4,
+    weight: 2,
+    opacity: 1,
+    color: '#b4b4b4',
+    dashArray: '4'
+  };
 }
 
-</style>
-<body>
-<div id='dashboard'>
-</div>
-<script src="https://d3js.org/d3.v3.min.js"></script>
-<script>
+// 3. add the county layer to the map. Also, this layer has some interactive features.
+
+// 3.1 declare an empty/null geojson object
+var county = null;
+
+// 3.2 interactive features.
+// 3.2.1 highlight a feature when the mouse hovers on it.
+
+function highlightFeature(e) {
+  // e indicates the current event
+  var layer = e.target; //the target capture the object which the event associates with
+  layer.setStyle({
+    weight: 8,
+    opacity: 0.8,
+    color: '#e3e3e3',
+    fillColor: '#e3e00f',
+    fillOpacity: 0.5
+  });
+  // bring the layer to the front.
+  layer.bringToFront();
+  // select the update class, and update the contet with the input value.
+  $(".update").html(
+    '<b>' + layer.feature.properties.county + ' County' + '</b><br>' +
+    (layer.feature.properties.id78 * 100).toFixed(0) + '% in LEP Household<br>');
+
+}
+// 3.2.3 reset the hightlighted feature when the mouse is out of its region.
+function resetHighlight(e) {
+  county.resetStyle(e.target);
+  $(".update").html("Hover over a county");
+}
+
+// 3.3 add these event the layer obejct.
+function onEachFeature(feature, layer) {
+  layer.on({
+    mouseover: highlightFeature,
+    mouseout: resetHighlight
+  });
+}
+
+// 3.4 assign the geojson data path, style option and onEachFeature option. And then Add the geojson layer to the map.
+
+$.when($.getJSON("assets/deiLang.geojson")).done(function(lang) {
+county = L.geoJson(lang, {
+  style: style,
+  onEachFeature: onEachFeature
+}).addTo(mymap);
+
+//add in dashboard
 function dashboard(id, fData){
     var barColor = 'steelblue';
     function segColor(c){ return {well:"#e08214",lessWell:"#41ab5d"}[c]; }
@@ -51,7 +139,7 @@ function dashboard(id, fData){
     // function to handle histogram.
     function histoGram(fD){
         var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 0};
-        hGDim.w = 1000 - hGDim.l - hGDim.r,
+        hGDim.w = 850 - hGDim.l - hGDim.r,
         hGDim.h = 300 - hGDim.t - hGDim.b;
 
         //create svg for histogram.
@@ -133,7 +221,7 @@ function dashboard(id, fData){
 
     // function to handle pieChart.
     function pieChart(pD){
-        var pC ={},    pieDim ={w:250, h: 250};
+        var pC ={},    pieDim ={w:200, h: 200};
         pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
 
         // create svg for pie chart.
@@ -237,21 +325,61 @@ function dashboard(id, fData){
         pC = pieChart(tF), // create the pie-chart.
         leg= legend(tF);  // create the legend.
 }
+        var oregon =[
+        {State:'Spanish',freq:{well:207448, lessWell:135584}}
+        ,{State:'French',freq:{well:9545, lessWell:1656}}
+        ,{State:'German',freq:{well:16040, lessWell:1457}}
+        ,{State:'Russian',freq:{well:33107, lessWell:19824}}
+        ,{State:'Other Indo-European',freq:{well:25643, lessWell:9447}}
+        ,{State:'Korean',freq:{well:5200, lessWell:4697}}
+        ,{State:'Chinese',freq:{well:14298, lessWell:15383}}
+        ,{State:'Vietnamese',freq:{well:9658, lessWell:15308}}
+        ,{State:'Tagolog',freq:{well:7399, lessWell:3153}}
+        ,{State:'Other Asian and PI',freq:{well:24893, lessWell:14424}}
+        ,{State:'Arabic',freq:{well:5307, lessWell:2749}}
+        ,{State:'Other',freq:{well:10645, lessWell:5287}}
+        ];
 
-var freqData=[
-{State:'Spanish',freq:{well:207448, lessWell:135584}}
-,{State:'French',freq:{well:9545, lessWell:1656}}
-,{State:'German',freq:{well:16040, lessWell:1457}}
-,{State:'Russian',freq:{well:33107, lessWell:19824}}
-,{State:'Other Indo-European',freq:{well:25643, lessWell:9447}}
-,{State:'Korean',freq:{well:5200, lessWell:4697}}
-,{State:'Chinese',freq:{well:14298, lessWell:15383}}
-,{State:'Vietnamese',freq:{well:9658, lessWell:15308}}
-,{State:'Tagolog',freq:{well:7399, lessWell:3153}}
-,{State:'Other Asian and PI',freq:{well:24893, lessWell:14424}}
-,{State:'Arabic',freq:{well:5307, lessWell:2749}}
-,{State:'Other',freq:{well:10645, lessWell:5287}}
-];
+        var Baker =[
+        {State:'Spanish',freq:{well:199, lessWell:161}}
+        ,{State:'French',freq:{well:31, lessWell:0}}
+        ,{State:'German',freq:{well:79, lessWell:2}}
+        ,{State:'Russian',freq:{well:25, lessWell:0}}
+        ,{State:'Other Indo-European',freq:{well:13, lessWell:10}}
+        ,{State:'Korean',freq:{well:11, lessWell:4}}
+        ,{State:'Chinese',freq:{well:5, lessWell:0}}
+        ,{State:'Vietnamese',freq:{well:25, lessWell:9}}
+        ,{State:'Tagolog',freq:{well:0, lessWell:4}}
+        ,{State:'Other Asian and PI',freq:{well:4, lessWell:0}}
+        ,{State:'Arabic',freq:{well:0, lessWell:0}}
+        ,{State:'Other',freq:{well:24, lessWell:0}}
+        ];
 
-dashboard('#dashboard',freqData);
-</script>
+dashboard('#chart', oregon);
+});
+// 9. Create Leaflet Control Object for Legend
+var legend = L.control({
+  position: 'bottomright'
+});
+
+// 10. Function that runs when legend is added to map
+legend.onAdd = function() {
+
+  // Create Div Element and Populate it with HTML
+  var div = L.DomUtil.create('div', 'legend');
+  div.innerHTML += '<b>% in LEP Households</b><br />';
+  div.innerHTML += '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p>25%-31%</p>';
+  div.innerHTML += '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p>17%-24%</p>';
+  div.innerHTML += '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p>10%-16%</p>';
+  div.innerHTML += '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p>6%-9%</p>';
+  div.innerHTML += '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><6%</p>';
+  // Return the Legend div containing the HTML content
+  return div;
+};
+// 11. Add a legend to map
+legend.addTo(mymap);
+
+//attribution
+$(".leaflet-control-attribution")
+  .css("background-color", "transparent")
+  .html("Supported by <a href='https://oregonexplorer.info/topics/rural-communities?ptopic=140' target='_blank'>The RCE @ Oregon State University </a> | Web Map by: <a href='#' target='_blank'>Benji Antolin");

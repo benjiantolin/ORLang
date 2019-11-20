@@ -282,8 +282,34 @@ Promise.all([
       text: 'Language Spoken at Home for the Population 5 Years and Over'
     },
     data: {
-      x: 'County',
-      columns: [geo, spaWell, spaLess, freWell, freLess, gerWell, gerLess, rusWell, rusLess, oieWell, oieLess, korWell, korLess, chiWell, chiLess, vieWell, vieLess, tagWell, tagLess, oapWell, oapLess, arbWell, arbLess, othWell, othLess,],
+      columns: [spaWell, spaLess, freWell, freLess, gerWell, gerLess, rusWell, rusLess, oieWell, oieLess, korWell, korLess, chiWell, chiLess, vieWell, vieLess, tagWell, tagLess, oapWell, oapLess, arbWell, arbLess, othWell, othLess],
+      type: 'bar',
+      colors: {
+        spaWell: '#3182bd',
+        spaLess: '#9ecae1',
+        freWell:'#31a354',
+        freLess:'#a1d99b',
+        gerWell:'#e6550d',
+        gerLess:'#fdae6b',
+        rusWell:'#756bb1',
+        rusLess:'#bcbddc',
+        oieWell:'#de2d26',
+        oieLess:'#fc9272',
+        korWell:'#dd1c77',
+        korLess:'#c994c7',
+        chiWell:'#43a2ca',
+        chiLess:'#a8ddb5',
+        vieWell:'#d95f0e',
+        vieLess:'#fec44f',
+        tagWell:'#a6bddb',
+        tagLess:'#ece2f0',
+        oapWell:'#99d8c9',
+        oapLess:'#e5f5f9',
+        arbWell:'#fa9fb5',
+        arbLess:'#fde0dd',
+        othWell:'#8c6bb1',
+        othLess:'#9ebcda'
+      },
       groups: [
         ["SpanishWell", "SpanishLess"],
         ["FrenchWell", "FrenchLess"],
@@ -297,21 +323,21 @@ Promise.all([
         ["Other Asian and PIWell", "Other Asian and PILess"],
         ["ArabicWell", "ArabicLess"],
         ["OtherWell", "OtherLess"],
-      ],
-      type: 'bar'
+      ]
     },
     axis: {
-      // rotated: true,
+      rotated: true,
       x: {
-        type: 'category'
+        type: 'category',
+        categories:['Spanish', 'French', 'German', 'Russian', 'Other Indo-European', 'Korean', 'Chinese', 'Vietnamese', 'Tagolog','Other Asian and PI', 'Arabic', 'Other']
       }
     },
     legend: {
-  show: true
-},
-tooltip: {
-  show: false
-},
+      show: true
+    },
+    tooltip: {
+      show: true
+    },
     zoom: {
       enabled: true
     },
