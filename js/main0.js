@@ -109,7 +109,7 @@ function highlightFeature(e) {
 // 3.2.3 reset the hightlighted feature when the mouse is out of its region.
 function resetHighlight(e) {
   county.resetStyle(e.target);
-  $(".update").html("Hover over a county");
+  $(".update").html("<b>Oregon</b><br>15% in LEP Household");
 }
 
 // 3.3 add these event the layer obejct.
