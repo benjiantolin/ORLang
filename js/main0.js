@@ -321,9 +321,10 @@ function dashboard(id, fData){
     // calculate total frequency by state for all segment.
     var sF = fData.map(function(d){return [d.State,d.total];});
 
-    var hG = histoGram(sF), // create the histogram.
-        pC = pieChart(tF), // create the pie-chart.
-        leg= legend(tF);  // create the legend.
+    var pC = pieChart(tF), // create the pie-chart.
+        leg = legend(tF),  // create the legend.
+        hG = histoGram(sF); // create the histogram.
+
 }
         var oregon =[
         {State:'Spanish',freq:{well:207448, lessWell:135584}}
