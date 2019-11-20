@@ -31,7 +31,7 @@ $(".showFrontPage").on("click", function() {
 })
 // 1. Create a map object.
 var mymap = L.map('map', {
-  center: [44, -124.5],
+  center: [44, -123.5],
   zoom: 7,
   maxZoom: 10,
   minZoom: 3,
