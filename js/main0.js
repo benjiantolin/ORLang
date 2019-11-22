@@ -54,13 +54,13 @@ colors = chroma.scale('PuBuGn').colors(5);
 
 function setColor(lepHH) {
   var id = 0;
-  if (lepHH > .25) {
+  if (lepHH > 6.03) {
     id = 4;
-  } else if (lepHH > .17 && lepHH <= .25) {
+  } else if (lepHH > 3.25 && lepHH <= 6.03) {
     id = 3;
-  } else if (lepHH > .1 && lepHH <= .17) {
+  } else if (lepHH > 1.44 && lepHH <= 3.25) {
     id = 2;
-  } else if (lepHH > .06 && lepHH <= .1) {
+  } else if (lepHH > 0.38 && lepHH <= 1.44) {
     id = 1;
   } else {
     id = 0;
@@ -71,7 +71,7 @@ function setColor(lepHH) {
 // 7. Set style function that sets fill color.md
 function style(feature) {
   return {
-    fillColor: setColor(feature.properties.id78),
+    fillColor: setColor(feature.properties.shareLep),
     fillOpacity: 0.4,
     weight: 2,
     opacity: 1,
@@ -122,7 +122,7 @@ function onEachFeature(feature, layer) {
 
 // 3.4 assign the geojson data path, style option and onEachFeature option. And then Add the geojson layer to the map.
 
-$.when($.getJSON("assets/deiLang.geojson")).done(function(lang) {
+$.when($.getJSON("assets/Lang.geojson")).done(function(lang) {
 county = L.geoJson(lang, {
   style: style,
   onEachFeature: onEachFeature
@@ -372,11 +372,11 @@ leg.onAdd = function() {
   // Create Div Element and Populate it with HTML
   var div = L.DomUtil.create('div', 'leg');
   div.innerHTML += '<b>% in LEP Households</b><br />';
-  div.innerHTML += '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p>25%-31%</p>';
-  div.innerHTML += '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p>17%-24%</p>';
-  div.innerHTML += '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p>10%-16%</p>';
-  div.innerHTML += '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p>6%-9%</p>';
-  div.innerHTML += '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><6%</p>';
+  div.innerHTML += '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p>>6.03%</p>';
+  div.innerHTML += '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p>3.25%-6.03%</p>';
+  div.innerHTML += '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p>1.44%-3.24%</p>';
+  div.innerHTML += '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p>0.38%-1.43%</p>';
+  div.innerHTML += '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><0.38%</p>';
   // Return the Legend div containing the HTML content
   return div;
 };
