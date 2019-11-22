@@ -9,7 +9,7 @@ html, body, #map {
 #sidebar {
   position: absolute;
   width: 480px;
-  height: 275px;
+  height: 300px;
   top: 1%;
   bottom: 1%;
   left: .5%;
