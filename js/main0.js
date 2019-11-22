@@ -139,7 +139,7 @@ function dashboard(id, fData){
     // function to handle histogram.
     function histoGram(fD){
         var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 0};
-        hGDim.w = 850 - hGDim.l - hGDim.r,
+        hGDim.w = 550 - hGDim.l - hGDim.r,
         hGDim.h = 300 - hGDim.t - hGDim.b;
 
         //create svg for histogram.
@@ -357,7 +357,7 @@ function dashboard(id, fData){
         ];
 
 dashboard('#chart', oregon);
-$('#chart table tbody tr:nth-child(1) td:nth-child(2)').html('Speaks english well')
+$('#chart table tbody tr:nth-child(1) td:nth-child(2)').html('Speaks English well')
 $('#chart table tbody tr:nth-child(2) td:nth-child(2)').html('Speaks English less than well')
 });
 

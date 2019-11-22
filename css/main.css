@@ -67,8 +67,9 @@ text-align: center;
   position: relative;
 }
 
-#legTitle {
-
+.tick text {
+  text-align: justify;
+  transform: rotate(45deg);
 }
 
 span {
