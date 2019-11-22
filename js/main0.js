@@ -321,8 +321,8 @@ function dashboard(id, fData){
     // calculate total frequency by state for all segment.
     var sF = fData.map(function(d){return [d.State,d.total];});
 
-    var pC = pieChart(tF), // create the pie-chart.
-        leg = legend(tF),  // create the legend.
+    var leg = legend(tF),  // create the legend.
+        pC = pieChart(tF), // create the pie-chart.
         hG = histoGram(sF); // create the histogram.
 
 }
@@ -357,17 +357,20 @@ function dashboard(id, fData){
         ];
 
 dashboard('#chart', oregon);
+$('#chart table tbody tr:nth-child(1) td:nth-child(2)').html('Speaks english well')
+$('#chart table tbody tr:nth-child(2) td:nth-child(2)').html('Speaks English less than well')
 });
+
 // 9. Create Leaflet Control Object for Legend
-var legend = L.control({
+var leg = L.control({
   position: 'bottomright'
 });
 
 // 10. Function that runs when legend is added to map
-legend.onAdd = function() {
+leg.onAdd = function() {
 
   // Create Div Element and Populate it with HTML
-  var div = L.DomUtil.create('div', 'legend');
+  var div = L.DomUtil.create('div', 'leg');
   div.innerHTML += '<b>% in LEP Households</b><br />';
   div.innerHTML += '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p>25%-31%</p>';
   div.innerHTML += '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p>17%-24%</p>';
@@ -378,7 +381,7 @@ legend.onAdd = function() {
   return div;
 };
 // 11. Add a legend to map
-legend.addTo(mymap);
+leg.addTo(mymap);
 
 //attribution
 $(".leaflet-control-attribution")

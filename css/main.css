@@ -6,19 +6,6 @@ html, body, #map {
   overflow: hidden
 }
 
-/*info panel*/
-#info {
-  position: absolute;
-  z-index: 1000;
-  bottom: 20px;
-  width: 45%;
-  color: #333333;
-  padding: 6px 8px;
-  background: rgba(225, 225, 225, 0.5);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-}
-
 #sidebar {
   position: absolute;
   width: 480px;
@@ -72,11 +59,23 @@ html, body, #map {
   opacity: 0.3;
 }
 
+#projName {
+text-align: center;
+}
+
+#chart {
+  position: relative;
+}
+
+#legTitle {
+
+}
+
 span {
   margin-right: 10px
 }
 
-.legend {
+.leg {
   line-height: 16px;
   width: 140px;
   color: #333333;
@@ -88,7 +87,7 @@ span {
   border-radius: 5px;
 }
 
-.legend i {
+.leg i {
   width: 16px;
   height: 16px;
   float: left;
@@ -96,15 +95,47 @@ span {
   opacity: 0.9;
 }
 
-.legend img {
+.leg img {
   width: 16px;
   height: 16px;
   margin-right: 3px;
   float: left;
 }
 
-.legend p {
+.leg p {
   font-size: 12px;
   line-height: 16px;
   margin: 0;
+}
+
+
+path:hover {  opacity:0.9; }
+rect:hover {  fill:blue; }
+.axis {  font: 10px sans-serif; }
+.legend tr{    border-bottom:1px solid grey; }
+.legend tr:first-child{    border-top:1px solid grey; }
+
+.axis path,
+
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {  display: none; }
+.legend{
+    margin-top:10px;
+    display:inline-block;
+    /* border-collapse: collapse;
+    border-spacing: 0px; */
+    width: auto;
+}
+.legend td{
+    padding:4px 5px;
+    vertical-align:bottom;
+}
+.legendFreq, .legendPerc{
+    align:right;
+    width:50px;
 }
