@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Benji Antolin">
   <title>Language Access Web Tool</title>
   <!-- css stylesheets -->
@@ -30,19 +30,19 @@
 
 <body>
   <div id="map"></div>
-  <div id='sidebar'>
+  <div id='sidebar' class ="col-3">
     <div id="title">Language Access Web Tool
       <span><a data-toggle="modal" data-target="#disclaimer"><i class="nav fas fa-question-circle"></i></a></span>
       <span><a href="#"><i class="fab fa-facebook"></i></a></span>
       <span><a href="#"><i class="fab fa-instagram"></i></a></span>
       <span><a href="#"><i class="fab fa-twitter-square"></i></a></span>
     </div>
-    <div id="subTitle">Language Spoken at Home for the Population 5 Years and Over</div>
+    <div id="subTitle">Population in Limited English Speaking Households: 5 years & older</div>
     <div id='instruct'>*Hover over county for county level stats*</div>
     <div class='update'><b>Oregon</b><br>2.9% of the Population 5 Year and over speaking English less than well</div>
-    <br>
-    <br>
-    <div id="chart" style="min-height: 550px"></div>
+    <!-- <br> -->
+    <!-- <br> -->
+    <div id="dashboard" class ="col-12"></div>
     <!-- <div class="result">
       <p class="d-flex justify-content-center">Share of Language Spoken at Home</p>
     <div id="chart" style="min-height: 250px"></div>
@@ -74,7 +74,7 @@
       </div>
     </div>
   </div>
-  <script src="js/main0.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>
