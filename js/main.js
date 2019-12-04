@@ -355,10 +355,24 @@ function dashboard(id, fData){
         ,{State:'Arabic',freq:{well:0, lessWell:0}}
         ,{State:'Other',freq:{well:24, lessWell:0}}
         ];
-
+// add in dashboard
 dashboard('#dashboard', oregon);
-$('#dashboard table tbody tr:nth-child(1) td:nth-child(2)').html('Speaks English well')
-$('#dashboard table tbody tr:nth-child(2) td:nth-child(2)').html('Speaks English less than well')
+$('#dashboard > table > tbody > tr:nth-child(1) > td:nth-child(2)').html('Speaks English well')
+$('#dashboard table tbody tr:nth-child(2) td:nth-child(2)').html('Speaks English<br>less than well')
+$('#dashboard > svg:nth-child(3) > g > g.x.axis > g:nth-child(1) > text').css('text-anchor', 'start')
+$('#dashboard > svg:nth-child(3) > g > g.x.axis > g:nth-child(2) > text').css('text-anchor', 'start')
+$('#dashboard > svg:nth-child(3) > g > g.x.axis > g:nth-child(3) > text').css('text-anchor', 'start')
+$('#dashboard > svg:nth-child(3) > g > g.x.axis > g:nth-child(4) > text').css('text-anchor', 'start')
+$('#dashboard > svg:nth-child(3) > g > g.x.axis > g:nth-child(5) > text').css('text-anchor', 'start')
+$('#dashboard > svg:nth-child(3) > g > g.x.axis > g:nth-child(6) > text').css('text-anchor', 'start')
+$('#dashboard > svg:nth-child(3) > g > g.x.axis > g:nth-child(7) > text').css('text-anchor', 'start')
+$('#dashboard > svg:nth-child(3) > g > g.x.axis > g:nth-child(8) > text').css('text-anchor', 'start')
+$('#dashboard > svg:nth-child(3) > g > g.x.axis > g:nth-child(9) > text').css('text-anchor', 'start')
+$('#dashboard > svg:nth-child(3) > g > g.x.axis > g:nth-child(10) > text').css('text-anchor', 'start')
+$('#dashboard > svg:nth-child(3) > g > g.x.axis > g:nth-child(11) > text').css('text-anchor', 'start')
+$('#dashboard > svg:nth-child(3) > g > g.x.axis > g:nth-child(12) > text').css('text-anchor', 'start')
+$('#dashboard > svg:nth-child(3)').css('height', '350')
+$('#dashboard > table').css('padding-top', '250')
 });
 
 // 9. Create Leaflet Control Object for Legend
