@@ -29,10 +29,9 @@ html, body, main {
 #dashboard {
   position: fixed;
   float: left;
-  width: 30%;
+  width: 100%;
   top: 30%;
   margin:50px auto;
-  /* height: 30%; */
   z-index: 1000;
 }
 
@@ -134,72 +133,58 @@ span {
   margin: 0;
 }
 
-path:hover {
-  opacity: 0.9;
-}
-
-rect:hover {
-  fill: blue;
-}
-
-.axis {
-  font: 10px sans-serif;
-}
-
-.legend tr {
-  border-bottom: 1px solid grey;
-}
-
-.legend tr:first-child {
-  border-top: 1px solid grey;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.x.axis path {
-  display: none;
-}
-
-.legend {
-  margin-top: 10px;
-  display: inline-block;
-  /* border-collapse: collapse;
-    border-spacing: 0px; */
-  width: auto;
-}
-
-.legend td {
-  padding: 4px 5px;
-  vertical-align: bottom;
-}
-
-.legendFreq, .legendPerc {
-  align: right;
-  width: 50px;
-}
-
-@media only screen and (max-width:800px) {
-
-  /* For tablets: */
-  .main {
-    width: 80%;
-    padding: 0;
+/* dashboard */
+  path {
+    stroke: #fff;
   }
 
-  .right {
-    width: 100%;
+  path:hover {
+    opacity: 0.9;
   }
-}
 
-@media only screen and (max-width:500px) {
-
-  /* For mobile phones: */
-  .menu, .main, .right {
-    width: 100%;
+  rect:hover {
+    fill: blue;
   }
-}
+
+  .axis {
+    font: 10px sans-serif;
+  }
+
+  .legend tr {
+    border-bottom: 1px solid grey;
+  }
+
+  .legend tr:first-child {
+    border-top: 1px solid grey;
+  }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  .x.axis path {
+    display: none;
+  }
+
+  .legend {
+    display: inline-block;
+  }
+
+  .legend td {
+    padding: 4px 5px;
+    vertical-align: bottom;
+  }
+
+  .legendFreq,
+  .legendPerc {
+    align: right;
+    width: 50px;
+  }
+
+  .tick text {
+    text-align: justify;
+    transform: rotate(45deg);
+  }
