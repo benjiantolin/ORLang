@@ -103,13 +103,13 @@ function highlightFeature(e) {
   // select the update class, and update the contet with the input value.
   $(".update").html(
     '<b>' + layer.feature.properties.Geography + ' County' + '</b><br>' +
-    (layer.feature.properties.shareLep).toFixed(2) + '% of the Population 5 Year and over speaking English less than well<br>');
+    (layer.feature.properties.shareLep).toFixed(2) + '% of the population 5 years and over speaking English less than well<br>');
 
 }
 // 3.2.3 reset the hightlighted feature when the mouse is out of its region.
 function resetHighlight(e) {
   county.resetStyle(e.target);
-  $(".update").html("<b>Oregon</b><br>2.9% of the Population 5 Year and over speaking English less than well");
+  $(".update").html("<b>Oregon</b><br>2.9% of the population 5 years and over speaking English less than well");
 }
 
 // 3.3 add these event the layer obejct.
@@ -385,7 +385,7 @@ leg.onAdd = function() {
 
   // Create Div Element and Populate it with HTML
   var div = L.DomUtil.create('div', 'leg');
-  div.innerHTML += '<b>% in LEP Households</b><br />';
+  div.innerHTML += '<b>% of Pop 5+ in LES Households</b><br />';
   div.innerHTML += '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p>>6.03%</p>';
   div.innerHTML += '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p>3.25%-6.03%</p>';
   div.innerHTML += '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p>1.44%-3.24%</p>';
