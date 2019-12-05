@@ -103,13 +103,13 @@ function highlightFeature(e) {
   // select the update class, and update the contet with the input value.
   $(".update").html(
     '<b>' + layer.feature.properties.Geography + ' County' + '</b><br>' +
-    (layer.feature.properties.shareLep).toFixed(2) + '% of the population 5 years and over speaking English less than well<br>');
+    (layer.feature.properties.shareLep).toFixed(2) + '% of the population 5 years and over limited English speaking households<br>');
 
 }
 // 3.2.3 reset the hightlighted feature when the mouse is out of its region.
 function resetHighlight(e) {
   county.resetStyle(e.target);
-  $(".update").html("<b>Oregon</b><br>2.9% of the population 5 years and over speaking English less than well");
+  $(".update").html("<b>Oregon</b><br>2.9% of the population 5 years and over limited English speaking households");
 }
 
 // 3.3 add these event the layer obejct.

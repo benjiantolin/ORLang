@@ -37,15 +37,9 @@
       <span><a href="#"><i class="fab fa-instagram"></i></a></span>
       <span><a href="#"><i class="fab fa-twitter-square"></i></a></span>
     </div>
-    <div id="subTitle">Population in Limited English Speaking Households: 5 years & older</div>
+    <div id="subTitle">Population in Limited English Speaking Households: 5 years & older <a data-toggle="modal" data-target="#definition"><i class="nav fas fa-info-circle"></i></a></div>
     <div id='instruct'>*Hover over county for county level stats*</div>
-    <div class='update'><b>Oregon</b><br>2.9% of the population 5 years and over speaking English less than well</div>
-    <!-- <br> -->
-    <!-- <br> -->
-    <!-- <div class="result">
-      <p class="d-flex justify-content-center">Share of Language Spoken at Home</p>
-    <div id="chart" style="min-height: 250px"></div>
-    </div> -->
+    <div class='update'><b>Oregon</b><br>2.9% of the population 5 years and over limited English speaking households</div>
   </div>
   <div id="dashboard"></div>
   <div id="disclaimer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -60,6 +54,8 @@
         <div class="modal-body">
           <div id="demo" class="carousel slide" data-ride="carousel">
             <p>This web application is intended only as a guide and is based on US Census data.</p>
+            <p>Dashboard Data Source: U.S. Census Bureau, 2013-2017 American Community Survey 5-Year Estimates, <a href="https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_C16001&prodType=table" target="_blank">Table: C16001</a></p>
+            <p>Choropleth Data Source: U.S. Census Bureau, 2013-2017 American Community Survey 5-Year Estimates, <a href="https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_B16003&prodType=table" target="_blank">Table: B16003</a></p>
           </div>
         </div>
         <div class="modal-footer">
@@ -70,6 +66,27 @@
             </label>
           </div>
           <button id="disclaimer-close" type="button" class="btn btn-primary col-md-2">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="definition" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="width:1250px!important">
+      <div class="modal-content">
+        <div class="modal-header">
+          <strong class="modal-title" id="exampleModalLongTitle">Definition</strong>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="demo" class="carousel slide" data-ride="carousel">
+            A limited English speaking household contains no members 14 and over who:
+            <br>
+            a) only speak English
+            <br>
+            b) who can speak English “very well.”
+          </div>
         </div>
       </div>
     </div>
